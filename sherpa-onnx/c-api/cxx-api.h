@@ -1912,6 +1912,8 @@ class SHERPA_ONNX_API SpeakerEmbeddingManager
 struct OfflineSpeakerSegmentationPyannoteModelConfig {
   /** Segmentation model filename. */
   std::string model;
+  /** Sliding-window shift as a fraction of the model window size. */
+  float window_shift_ratio = 0.1f;
 };
 
 /** @brief Segmentation model configuration for offline speaker diarization. */
@@ -1933,6 +1935,8 @@ struct FastClusteringConfig {
   int32_t num_clusters = 0;
   /** Distance threshold used when the number of speakers is unknown. */
   float threshold = 0.5;
+  /** If true, each returned diarization segment carries a confidence value. */
+  bool compute_confidence = false;
 };
 
 /** @brief Configuration for offline speaker diarization. */
@@ -1951,12 +1955,19 @@ struct OfflineSpeakerDiarizationConfig {
 
 /** @brief One diarization segment. */
 struct OfflineSpeakerDiarizationSegment {
+  /** Sentinel returned in 'confidence' when the value is unavailable */
+  static constexpr float kUnavailableConfidence = -2.0f;
+
   /** Segment start time in seconds. */
   float start;
   /** Segment end time in seconds. */
   float end;
   /** Speaker label, typically an integer cluster ID. */
   int32_t speaker;
+  /** Confidence value in [-1, 1] when clustering.compute_confidence is set on
+   * the config. Otherwise equals kUnavailableConfidence.
+   */
+  float confidence = kUnavailableConfidence;
 };
 
 /** @brief Progress callback for offline speaker diarization. */

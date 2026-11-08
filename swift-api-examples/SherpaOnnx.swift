@@ -1757,10 +1757,13 @@ public class SherpaOnnxOnlinePunctuationWrapper {
   }
 }
 
-public func sherpaOnnxOfflineSpeakerSegmentationPyannoteModelConfig(model: String)
-  -> SherpaOnnxOfflineSpeakerSegmentationPyannoteModelConfig
-{
-  return SherpaOnnxOfflineSpeakerSegmentationPyannoteModelConfig(model: toCPointer(model))
+public func sherpaOnnxOfflineSpeakerSegmentationPyannoteModelConfig(
+  model: String,
+  windowShiftRatio: Float = 0.1
+) -> SherpaOnnxOfflineSpeakerSegmentationPyannoteModelConfig {
+  return SherpaOnnxOfflineSpeakerSegmentationPyannoteModelConfig(
+    model: toCPointer(model),
+    window_shift_ratio: windowShiftRatio)
 }
 
 public func sherpaOnnxOfflineSpeakerSegmentationModelConfig(
@@ -1777,10 +1780,14 @@ public func sherpaOnnxOfflineSpeakerSegmentationModelConfig(
   )
 }
 
-public func sherpaOnnxFastClusteringConfig(numClusters: Int = -1, threshold: Float = 0.5)
+public func sherpaOnnxFastClusteringConfig(
+  numClusters: Int = -1, threshold: Float = 0.5, computeConfidence: Bool = false
+)
   -> SherpaOnnxFastClusteringConfig
 {
-  return SherpaOnnxFastClusteringConfig(num_clusters: Int32(numClusters), threshold: threshold)
+  return SherpaOnnxFastClusteringConfig(
+    num_clusters: Int32(numClusters), threshold: threshold,
+    compute_confidence: computeConfidence ? 1 : 0)
 }
 
 public func sherpaOnnxSpeakerEmbeddingExtractorConfig(

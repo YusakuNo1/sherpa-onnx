@@ -14,35 +14,35 @@ let package = Package(
     .library(name: "sherpa-onnx-shared", targets: ["SherpaOnnxShared"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/csukuangfj/onnxruntime-libs", exact: "1.27.1")
+    .package(url: "https://github.com/csukuangfj/onnxruntime-libs", exact: "1.28.2")
   ],
   targets: [
     // --- Static binary targets ---
     .binaryTarget(
       name: "SherpaOnnxMacOS",
       url:
-        "https://github.com/k2-fsa/sherpa-onnx/releases/download/xcframework/sherpa-onnx-v1.13.5-macos-static.xcframework.zip",
-      checksum: "56bbe822793786e88ff9f459986a78b58a8253d85510054c1591bd2d1bd4bdf4"
+        "https://github.com/k2-fsa/sherpa-onnx/releases/download/xcframework/sherpa-onnx-v1.13.8-macos-static.xcframework.zip",
+      checksum: "93f7a064abe99e0d6185a88c5b36ce18c4bff35cd0d5e4e81f81151de8e3e7e5"
     ),
     .binaryTarget(
       name: "SherpaOnnxIOS",
       url:
-        "https://github.com/k2-fsa/sherpa-onnx/releases/download/xcframework/sherpa-onnx-v1.13.5-ios-static.xcframework.zip",
-      checksum: "79214d00e275c864f0c4f7f9d1c252f8b621b185ceb54c13a43906da6f913080"
+        "https://github.com/k2-fsa/sherpa-onnx/releases/download/xcframework/sherpa-onnx-v1.13.8-ios-static.xcframework.zip",
+      checksum: "6b8e769cb153343270fdccbe92e3b3db0d1c421d67fa0989ab01fdf5b2fcf2de"
     ),
 
     // --- Shared binary targets ---
     .binaryTarget(
       name: "SherpaOnnxMacOSShared",
       url:
-        "https://github.com/k2-fsa/sherpa-onnx/releases/download/xcframework/sherpa-onnx-v1.13.5-macos-shared.xcframework.zip",
-      checksum: "517b17eedb4356ee2940781201259a3a0d5a638e9817ebb62cdc4e231608dd2c"
+        "https://github.com/k2-fsa/sherpa-onnx/releases/download/xcframework/sherpa-onnx-v1.13.8-macos-shared.xcframework.zip",
+      checksum: "0257c8964f1772f20429b8733094df7e818e9cebe36449b7ebadf7c14f4c5593"
     ),
     .binaryTarget(
       name: "SherpaOnnxIOSShared",
       url:
-        "https://github.com/k2-fsa/sherpa-onnx/releases/download/xcframework/sherpa-onnx-v1.13.5-ios-shared.xcframework.zip",
-      checksum: "d6feb76810875adf4fe0d5f075aa92bd621af57f3a99813770a2c4c9de2a4c87"
+        "https://github.com/k2-fsa/sherpa-onnx/releases/download/xcframework/sherpa-onnx-v1.13.8-ios-shared.xcframework.zip",
+      checksum: "449fd0d139ef1efc11f8a202cd47bd6cff448ada1ba289210946bc3f2d65a689"
     ),
 
     // --- Static wrapper target (default) ---

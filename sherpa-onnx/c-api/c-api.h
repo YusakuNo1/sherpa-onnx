@@ -3836,6 +3836,13 @@ SHERPA_ONNX_API int32_t SherpaOnnxLinearResamplerResampleGetOutputSampleRate(
 typedef struct SherpaOnnxOfflineSpeakerSegmentationPyannoteModelConfig {
   /** Segmentation model filename. */
   const char *model;
+  /**
+   * Sliding-window shift as a fraction of the model window size.
+   *
+   * Must be in (0, 1]. Set to 0 (or a negative value) to use the default of
+   * 0.1.
+   */
+  float window_shift_ratio;
 } SherpaOnnxOfflineSpeakerSegmentationPyannoteModelConfig;
 
 /**
@@ -3868,6 +3875,8 @@ typedef struct SherpaOnnxFastClusteringConfig {
   int32_t num_clusters;
   /** Distance threshold used when the number of speakers is unknown. */
   float threshold;
+  /** When non-zero, per-segment confidence values are computed. */
+  int32_t compute_confidence;
 } SherpaOnnxFastClusteringConfig;
 
 /**
@@ -3958,6 +3967,12 @@ typedef struct SherpaOnnxOfflineSpeakerDiarizationSegment {
   float end;
   /** Speaker label, typically an integer cluster ID. */
   int32_t speaker;
+  /**
+   * Per-segment confidence in [-1, 1] (higher is more confident), or -2 if
+   * unavailable (compute_confidence disabled, or the score could not be
+   * computed for this segment).
+   */
+  float confidence;
 } SherpaOnnxOfflineSpeakerDiarizationSegment;
 
 /**

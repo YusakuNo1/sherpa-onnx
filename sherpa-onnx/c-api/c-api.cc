@@ -3149,6 +3149,10 @@ GetOfflineSpeakerDiarizationConfig(
 
   sd_config.segmentation.pyannote.model =
       SHERPA_ONNX_OR(config->segmentation.pyannote.model, "");
+  sd_config.segmentation.pyannote.window_shift_ratio =
+      config->segmentation.pyannote.window_shift_ratio <= 0
+          ? 0.1f
+          : config->segmentation.pyannote.window_shift_ratio;
   sd_config.segmentation.num_threads =
       GetNumThreads(config->segmentation.num_threads);
   sd_config.segmentation.debug = config->segmentation.debug;
@@ -3173,6 +3177,9 @@ GetOfflineSpeakerDiarizationConfig(
 
   sd_config.clustering.threshold =
       SHERPA_ONNX_OR(config->clustering.threshold, 0.5);
+
+  sd_config.clustering.compute_confidence =
+      config->clustering.compute_confidence != 0;
 
   sd_config.min_duration_on = SHERPA_ONNX_OR(config->min_duration_on, 0.3);
 
@@ -3230,6 +3237,9 @@ void SherpaOnnxOfflineSpeakerDiarizationSetConfig(
   sd_config.clustering.threshold =
       SHERPA_ONNX_OR(config->clustering.threshold, 0.5);
 
+  sd_config.clustering.compute_confidence =
+      config->clustering.compute_confidence != 0;
+
   sd->impl->SetConfig(sd_config);
 }
 
@@ -3262,6 +3272,7 @@ SherpaOnnxOfflineSpeakerDiarizationResultSortByStartTime(
     ans[i].start = s.Start();
     ans[i].end = s.End();
     ans[i].speaker = s.Speaker();
+    ans[i].confidence = s.Confidence();
   }
 
   return ans;

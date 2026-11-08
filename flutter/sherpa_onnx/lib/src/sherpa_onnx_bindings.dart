@@ -66,11 +66,17 @@ final class SherpaOnnxOfflineSpeakerDiarizationSegment extends Struct {
 
   @Int32()
   external int speaker;
+
+  @Float()
+  external double confidence;
 }
 
 final class SherpaOnnxOfflineSpeakerSegmentationPyannoteModelConfig
     extends Struct {
   external Pointer<Utf8> model;
+
+  @Float()
+  external double windowShiftRatio;
 }
 
 final class SherpaOnnxOfflineSpeakerSegmentationModelConfig extends Struct {
@@ -91,6 +97,9 @@ final class SherpaOnnxFastClusteringConfig extends Struct {
 
   @Float()
   external double threshold;
+
+  @Int32()
+  external int computeConfidence;
 }
 
 final class SherpaOnnxOfflineSpeakerDiarizationConfig extends Struct {
